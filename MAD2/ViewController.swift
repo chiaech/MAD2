@@ -8,13 +8,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController{
 
-    override func viewDidLoad() {
+    @IBOutlet weak var frontLabel: UILabel!
+    @IBOutlet weak var backLabel: UILabel!
+    
+    override func viewDidLoad(){
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
+    override func didReceiveMemoryWarning(){
+        super.didReceiveMemoryWarning()
+    }
+    
+    
+    
+    @IBAction func didTapOnFlashcard(_ sender: Any){
+    
+        if self.frontLabel.isHidden {
+            self.frontLabel.isHidden = false
+        } else {
+            self.frontLabel.isHidden = true
+        }
+    }
 
 }
 
