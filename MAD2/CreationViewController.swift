@@ -18,11 +18,16 @@ class CreationViewController: UIViewController {
     @IBOutlet weak var answerThreeTextField: UITextField!
     @IBOutlet weak var answerFourTextField: UITextField!
     
+    var initialQuestion: String?
+    var initialAnswer: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        questionTextField.text = initialQuestion
+        answerTwoTextField.text = initialAnswer
     }
     
     //dismiss view controller cancel + done
@@ -38,10 +43,21 @@ class CreationViewController: UIViewController {
         let answerThreeText = answerThreeTextField.text
         let answerFourText = answerFourTextField.text
         
-        //update the flashcard
-        flashcardsController.updateFlashcard(question: questionText!, answerOne: answerOneText!, answerTwo: answerTwoText!, answerThree: answerThreeText!, answerFour: answerFourText!)
-        
-        dismiss(animated: true)
+        //input validation: check if empty
+        if (questionText == nil || answerOneText == nil || answerTwoText == nil || answerThreeText == nil || answerFourText == nil || questionText!.isEmpty || answerOneText!.isEmpty || answerTwoText!.isEmpty || answerThreeText!.isEmpty || answerFourText!.isEmpty) {
+            
+            //error alert
+            let alert = UIAlertController(title: "Missing text", message: "Please enter a question and an answer.", preferredStyle: .alert)
+            present(alert, animated: true)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(okAction)
+        } else {
+            //update the flashcard
+            flashcardsController.updateFlashcard(question: questionText!, answerOne: answerOneText!, answerTwo: answerTwoText!, answerThree: answerThreeText!, answerFour: answerFourText!)
+    
+            dismiss(animated: true)
+        }
     }
     
     /*

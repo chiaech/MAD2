@@ -73,7 +73,16 @@ class ViewController: UIViewController{
         })
     }
     
-    func updateFlashcard(question:String, answerOne: String, answerTwo: String, answerThree: String, answerFour: String){        
+    func updateFlashcard(question:String, answerOne: String, answerTwo: String?, answerThree: String?, answerFour: String?){
+        
+//        let flashcard = Flashcard(question: question, answer: answer, answer2: answer2, answer3: answer3)
+
+        frontLabel.text = question
+        backLabel.text = answerOne
+        btnOptionOne.setTitle(answerTwo, for: .normal)
+        btnOptionTwo.setTitle(answerOne, for: .normal)
+        btnOptionThree.setTitle(answerThree, for: .normal)
+        btnOptionFour.setTitle(answerFour, for: .normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -86,6 +95,12 @@ class ViewController: UIViewController{
         
         //set flashcardsController property to self
         creationController.flashcardsController = self
+        
+        //edit option
+        if segue.identifier == "EditSegue"{
+            creationController.initialQuestion = frontLabel.text
+            creationController.initialAnswer = backLabel.text
+        }
     }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
