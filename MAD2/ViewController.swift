@@ -19,6 +19,7 @@ class ViewController: UIViewController{
     @IBOutlet weak var btnOptionThree: UIButton!
     @IBOutlet weak var btnOptionFour: UIButton!
     
+    @IBOutlet weak var btnNewCard: UIButton!
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -61,8 +62,6 @@ class ViewController: UIViewController{
         super.didReceiveMemoryWarning()
     }
     
-    
-    
     @IBAction func didTapOnFlashcard(_ sender: Any){
         UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
             
@@ -72,6 +71,21 @@ class ViewController: UIViewController{
                 self.frontLabel.isHidden = true
             }
         })
+    }
+    
+    func updateFlashcard(question:String, answerOne: String, answerTwo: String, answerThree: String, answerFour: String){        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //we know the destination of the segue is Navigation Controller
+        let navigationController = segue.destination as! UINavigationController
+        
+        //we know the Navigation Controller only contains a Creation View Controller
+        let creationController = navigationController.topViewController as! CreationViewController
+        
+        //set flashcardsController property to self
+        creationController.flashcardsController = self
     }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
@@ -90,7 +104,4 @@ class ViewController: UIViewController{
     @IBAction func didTapOptionFour(_ sender: Any) {
         btnOptionFour.isHidden = true
     }
-    
-
 }
-
