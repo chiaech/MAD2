@@ -149,6 +149,7 @@ class ViewController: UIViewController{
         //update buttons
         updatePreviousNextButtons()
         updateLabels()
+        saveAllFlashcardsToDisk()
     }
     
     func updatePreviousNextButtons(){
